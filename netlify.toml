@@ -1,0 +1,5 @@
+# Liga a Edge Function "car-og" para todos os endereços /carro/<id>
+# (o resto do site continua funcionando normalmente)
+[[edge_functions]]
+path = "/carro/*"
+function = "car-og"
