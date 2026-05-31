@@ -159,7 +159,7 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
 .ban-dot.on{background:#fff}
 
 /* ───── ESTOQUE ───── */
-.estoque-layout{display:grid;grid-template-columns:236px 1fr;gap:26px;margin-top:22px;align-items:start}
+.estoque-layout{display:grid;grid-template-columns:1fr;gap:26px;margin-top:22px;align-items:start}
 .filters-aside{position:sticky;top:78px}
 .filters-toggle{display:none;width:100%;border:1px solid var(--line);border-radius:9px;padding:12px;font-weight:700;font-size:13px;margin-top:16px;background:var(--bg2)}
 .fgroup{border-bottom:1px solid var(--line);padding:16px 0}
@@ -513,16 +513,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   <div class="wrap">
     <div class="phead"><h1>Estoque</h1><p>Veículos selecionados, prontos pra rodar.</p></div>
     <input class="fsearch" id="f-search-top" type="text" placeholder="🔎 Buscar por modelo, marca..." style="margin:6px 0 14px" autocomplete="off">
-    <button class="filters-toggle" onclick="toggleFilters()">⚙ Filtros</button>
     <div class="estoque-layout">
-      <aside class="filters-aside" id="filters-aside">
-        <input class="fsearch" id="f-search" type="text" placeholder="🔎 Buscar modelo...">
-        <div id="filters-dyn"></div>
-        <div class="fgroup">
-          <h4>Faixa de preço</h4>
-          <div class="chips" id="f-price"></div>
-        </div>
-      </aside>
       <div>
         <div class="estoque-top">
           <div class="estoque-count" id="est-count">Carregando...</div>
@@ -1132,7 +1123,7 @@ function toggleFaq(btn){
 /* ─── NAV mobile ─── */
 function toggleNav(){document.getElementById('nav').classList.toggle('open');}
 function closeNav(){document.getElementById('nav').classList.remove('open');}
-function toggleFilters(){document.getElementById('filters-aside').classList.toggle('open');}
+function toggleFilters(){var a=document.getElementById('filters-aside');if(a)a.classList.toggle('open');}
 
 /* ─── ROTEAMENTO ─── */
 const PAGES=['home','estoque','carro','vender','contato'];
