@@ -777,12 +777,15 @@ function renderHomeDestaques(){
 }
 
 /* ─── HOME: numeros ─── */
+const FAMILIAS_BASE = 54; // vendas de anos anteriores (ex: 54 em 2025). Some com as vendas do ano atual.
 function renderNumeros(){
   const el=document.getElementById('trust-vendas');
   if(el)el.textContent=(NUMEROS.vendidos!=null?NUMEROS.vendidos:130)+'/'+(NUMEROS.meta!=null?NUMEROS.meta:300);
   const ef=document.getElementById('trust-familias');
   if(ef){
-    const v=NUMEROS.familias!=null?NUMEROS.familias:500;
+    // Famílias atendidas = vendas do ano atual + base de anos anteriores (calculado automaticamente)
+    const vend=(NUMEROS.vendidos!=null?Number(NUMEROS.vendidos):0)||0;
+    const v=FAMILIAS_BASE+vend;
     // se ainda não animou, atualiza o alvo; senão, escreve direto
     if(!ef.dataset.animated){ef.setAttribute('data-target',v);ef.textContent='+'+v;}
     else ef.textContent='+'+v;
