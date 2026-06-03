@@ -700,7 +700,7 @@ function isAvailable(c){
 /* ─── Carrega o estoque do banco ─── */
 async function fetchCars(){
   try{
-    const r=await fetch(SB_URL+'/rest/v1/carros?select=id,data',{headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY}});
+    const r=await fetch(SB_URL+'/rest/v1/vitrine?select=id,data',{headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY}});
     if(!r.ok)throw new Error('HTTP '+r.status);
     const rows=await r.json();
     const bRow=(rows||[]).find(function(x){return x.id===BANNERS_ID;});
@@ -709,7 +709,9 @@ async function fetchCars(){
     DEPOIMENTOS=(dRow&&dRow.data&&dRow.data.depoimentos)||[];
     const nRow=(rows||[]).find(function(x){return x.id===NUMEROS_ID;});
     if(nRow&&nRow.data)NUMEROS=nRow.data;
-    ALL=(rows||[]).map(row=>Object.assign({},row.data||{},{id:row.id})).filter(isAvailable);
+    // A view "vitrine" já entrega só carros disponíveis e sanitizados; aqui só
+    // tiramos os singletons (__banners__/__numeros__/__depoimentos__) da lista.
+    ALL=(rows||[]).filter(row=>String(row.id).slice(0,2)!=='__').map(row=>Object.assign({},row.data||{},{id:row.id}));
     LOADED=true;
     buildFilters();
     renderDepoimentos();

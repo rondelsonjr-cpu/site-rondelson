@@ -37,7 +37,7 @@ export default async (request, context) => {
   let data = {};
   try {
     const r = await fetch(
-      SB_URL + '/rest/v1/carros?id=eq.' + encodeURIComponent(id) + '&select=data',
+      SB_URL + '/rest/v1/vitrine?id=eq.' + encodeURIComponent(id) + '&select=data',
       { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } }
     );
     if (r.ok) {
