@@ -189,6 +189,7 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
 .ctag{position:absolute;top:9px;left:9px;font-size:10.5px;font-weight:700;letter-spacing:.3px;padding:5px 10px;border-radius:13px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .ctag-cli{background:#f0883e;color:#1a1205}
 .ctag-prep{background:#58a6ff;color:#04101f}
+.dtag{display:inline-block;margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.3px;color:#0a0a0a;padding:7px 14px;border-radius:20px}
 .noimg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:repeating-linear-gradient(45deg,#171717,#171717 13px,#1c1c1c 13px,#1c1c1c 26px)}
 .noimg .nicon{font-size:32px;opacity:.5}
 .noimg .ntxt{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2.5px;color:#6f6f6f}
@@ -695,17 +696,19 @@ async function fetchCars(){
 }
 
 /* ─── Card de carro (Home e Estoque) ─── */
-// Tag de situação no card: "Com o cliente" (consignado que está com o dono)
-// ou "Em preparação" (ainda não finalizou o preparo / não foi pro showroom).
-function carTag(c){
+// Situação do carro para a tag: "Com o cliente" (consignado que está com o dono)
+// ou "Em preparação" (ainda não foi pro showroom). Retorna null se já está pronto.
+function _carTagInfo(c){
   if(c.consignado===true && c.consignadoComCliente===true)
-    return '<span class="ctag ctag-cli">📍 Com o cliente</span>';
-  var showroomPronto=(c.swChecked&&c.swChecked.length>0)||c.prForcado===true||(c.swFotosSite&&c.swFotosSite.length>0);
+    return {label:'📍 Com o cliente',cls:'cli',cor:'#f0883e'};
+  var pronto=(c.swChecked&&c.swChecked.length>0)||c.prForcado===true||(c.swFotosSite&&c.swFotosSite.length>0);
   var emPreparo=((c.prChecked&&c.prChecked.length>0)||c.prcAceito===true||c.consignado===true);
-  if(emPreparo && !showroomPronto)
-    return '<span class="ctag ctag-prep">🔧 Em preparação</span>';
-  return '';
+  if(emPreparo && !pronto)
+    return {label:'🔧 Em preparação',cls:'prep',cor:'#58a6ff'};
+  return null;
 }
+function carTag(c){ var t=_carTagInfo(c); return t?('<span class="ctag ctag-'+t.cls+'">'+t.label+'</span>'):''; }
+function carTagDetalhe(c){ var t=_carTagInfo(c); return t?('<span class="dtag" style="background:'+t.cor+'">'+t.label+'</span>'):''; }
 function carCard(c){
   const fotos=photosOf(c);
   const pv=priceNum(c.swPrecoVenda);
@@ -908,6 +911,7 @@ function showCarDetail(id){
       +'<div><div class="gallery" id="gallery"></div><div class="d-thumbs" id="d-thumbs"></div></div>'
       +'<div class="d-info">'
         +'<h1>'+esc(c.nome||'Veículo')+'</h1>'
+        +carTagDetalhe(c)
         +(tags.length?'<div class="d-tags">'+tags.map(t=>'<span class="d-tag">'+t+'</span>').join('')+'</div>':'')
         +'<div class="d-price"><small>Valor do veículo</small><b>'+preco+'</b></div>'
         +'<a class="d-wpp" href="'+wpp(wTxt)+'" target="_blank" rel="noopener">'+WPP_SVG+'Tenho interesse neste carro</a>'
