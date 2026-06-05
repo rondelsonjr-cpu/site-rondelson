@@ -241,34 +241,6 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
 .d-desc h3{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase;margin-bottom:8px}
 .d-desc p{font-size:14.5px;line-height:1.65;white-space:pre-wrap}
 
-/* ───── FINANCIAR ───── */
-.fin-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:24px;align-items:start}
-.fin-row{margin-bottom:26px}
-.fin-row .lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.fin-row .lab span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase}
-.fin-row .lab b{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--white);letter-spacing:1px}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:var(--line);border-radius:3px;outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid var(--bg)}
-input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid var(--bg)}
-.fin-scale{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:var(--mut);margin-top:6px}
-.fin-toggle{display:flex;gap:8px;margin-top:6px}
-.fin-toggle button{border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.5px;color:var(--mut)}
-.fin-toggle button.on{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
-.fin-result{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:26px}
-.fin-result .rlab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase}
-.fin-big{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:1px;color:var(--gold);line-height:.9;margin:4px 0}
-.fin-big small{font-size:24px;color:var(--mut)}
-.fin-parc{color:var(--mut);font-size:14px}
-.fin-table{margin:20px 0;border-top:1px dashed var(--line)}
-.fin-table .r{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13px}
-.fin-table .r span{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:1px;color:var(--mut);text-transform:uppercase}
-.fin-table .r b{color:var(--white)}
-.fin-disc{text-align:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mut);margin-top:12px;text-transform:uppercase}
-.car-sim{margin-top:36px;border-top:1px solid var(--line);padding-top:30px}
-.car-sim-head h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;color:var(--white);line-height:1}
-.car-sim-head p{color:var(--mut);font-size:14px;margin-top:5px}
-.fin-note{font-size:12.5px;line-height:1.6;color:var(--mut);margin-top:14px;padding-top:13px;border-top:1px dashed var(--line)}
-
 /* ───── VENDER ───── */
 .vender{text-align:center;padding:30px 0 10px}
 .tag-pill{display:inline-block;border:1px solid var(--gold-dk);border-radius:20px;padding:7px 16px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--gold-lt);text-transform:uppercase}
@@ -312,7 +284,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   .footer-in{grid-template-columns:1fr 1fr}
   .home-grid{grid-template-columns:repeat(2,1fr)}
   .car-grid{grid-template-columns:repeat(2,1fr)}
-  .d-wrap,.fin-wrap,.contato-wrap{grid-template-columns:1fr}
+  .d-wrap,.contato-wrap{grid-template-columns:1fr}
   .testi-grid{grid-template-columns:1fr}
   .estoque-layout{grid-template-columns:1fr}
   .filters-aside{position:static;display:none}
@@ -578,7 +550,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       <div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vocês aceitam meu carro na troca?<span class="pm">+</span></button><div class="faq-a"><p>Sim — qualquer marca. A avaliação é gratuita e leva cerca de 20 minutos. Você pode adiantar mandando a placa, a quilometragem e uma foto no nosso WhatsApp.</p></div></div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Como funciona a garantia?<span class="pm">+</span></button><div class="faq-a"><p>Todo veículo passa por avaliação antes de ir para a venda. Fale com a gente no WhatsApp para confirmar as condições de garantia do carro que você tem interesse.</p></div></div>
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Posso financiar sem entrada?<span class="pm">+</span></button><div class="faq-a"><p>O financiamento depende de análise de crédito. Em muitos casos é possível financiar com entrada baixa ou sem entrada. Use o simulador na página de qualquer carro do estoque para ter uma referência — e a gente te orienta no WhatsApp.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Posso financiar sem entrada?<span class="pm">+</span></button><div class="faq-a"><p>O financiamento depende de análise de crédito. Em muitos casos é possível financiar com entrada baixa ou sem entrada. Chama a gente no WhatsApp que a gente te orienta e simula as melhores condições pra você.</p></div></div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vocês fazem consignação?<span class="pm">+</span></button><div class="faq-a"><p>Sim. Se você prefere deixar seu carro com a gente para vender, trabalhamos com consignação. Chame no WhatsApp para entender como funciona.</p></div></div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Que documentos preciso levar?<span class="pm">+</span></button><div class="faq-a"><p>Para comprar: documento com foto e comprovante de residência. Para financiar, pode haver documentos adicionais conforme o banco. A gente te passa a lista certinha pelo WhatsApp.</p></div></div>
         <div class="faq-ask">
@@ -648,7 +620,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 const WHATSAPP  = '5527997283536';
 const INSTAGRAM = 'rondelsoncar';
 const YOUTUBE   = 'https://youtube.com/@rondelsonjunior10';
-const TAXA_AM   = 0.0129;  // taxa estimada do financiamento (1,29% a.m.)
 
 const SB_URL = 'https://uyelqatatrgtjcvceoah.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5ZWxxYXRhdHJndGpjdmNlb2FoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5Njk1NzUsImV4cCI6MjA5NDU0NTU3NX0.YRJpDrMx4R2U6YTHhwcz-6PyEy8qb8_3XICmSHCwxow';
@@ -933,39 +904,6 @@ function showCarDetail(id){
   if(c.cor)tags.push('Cor '+esc(c.cor));
   const desc=String(c.swDescricao||'').trim();
   const wTxt='Olá! Tenho interesse no '+(c.nome||'veículo')+pmsg+' do site da Rondelson Car. Link: '+location.href;
-  const simHtml = pv>0 ? (
-    '<div class="car-sim">'
-    +'<div class="car-sim-head"><h2>Simule o financiamento</h2>'
-    +'<p>Uma estimativa de parcela para este carro. É só ajustar a entrada e o prazo.</p></div>'
-    +'<div class="fin-wrap">'
-      +'<div>'
-        +'<div class="fin-row" style="margin-bottom:18px"><div class="lab"><span>Valor do veículo</span><b>'+brl(pv)+'</b></div></div>'
-        +'<div class="fin-row"><div class="lab"><span>Entrada</span><b id="fv-entrada">R$ 0</b></div>'
-          +'<input type="range" id="r-entrada" min="0" max="90" step="5" value="30" oninput="calcFin()">'
-          +'<div class="fin-scale"><span>0%</span><span>90%</span></div></div>'
-        +'<div class="fin-row"><div class="lab"><span>Prazo</span><b id="fv-prazo">48 meses</b></div>'
-          +'<input type="range" id="r-prazo" min="12" max="60" step="6" value="48" oninput="calcFin()">'
-          +'<div class="fin-scale"><span>12×</span><span>60×</span></div></div>'
-        +'<div class="fin-row" style="margin-bottom:0"><div class="lab"><span>Usar meu carro na troca?</span></div>'
-          +'<div class="fin-toggle"><button id="tr-sim" class="on" onclick="setTroca(true)">Sim, avaliar</button>'
-          +'<button id="tr-nao" onclick="setTroca(false)">Não, só dinheiro</button></div></div>'
-      +'</div>'
-      +'<div class="fin-result">'
-        +'<div class="rlab">Parcela estimada</div>'
-        +'<div class="fin-big" id="fv-parcela">R$ 0<small>/mês</small></div>'
-        +'<div class="fin-parc" id="fv-emparcelas">em 48 parcelas</div>'
-        +'<div class="fin-table">'
-          +'<div class="r"><span>Valor financiado</span><b id="fv-fin">R$ 0</b></div>'
-          +'<div class="r"><span>Taxa estimada</span><b id="fv-taxa">1,29% a.m.</b></div>'
-          +'<div class="r"><span>Total a pagar</span><b id="fv-total">R$ 0</b></div>'
-          +'<div class="r"><span>Primeira parcela</span><b>30 dias</b></div>'
-        +'</div>'
-        +'<a class="d-wpp" id="fin-wpp" target="_blank" rel="noopener">'+WPP_SVG+'Quero financiar este carro</a>'
-        +'<div class="fin-note">Esta é apenas uma simulação, serve só como referência. A parcela e a taxa reais mudam conforme o seu CPF e o veículo escolhido — confirme os valores certos com a gente pelo WhatsApp.</div>'
-      +'</div>'
-    +'</div>'
-    +'</div>'
-  ) : '';
   box.innerHTML='<a class="back" href="#/estoque">‹ Voltar ao estoque</a>'
     +'<div class="d-wrap">'
       +'<div><div class="gallery" id="gallery"></div><div class="d-thumbs" id="d-thumbs"></div></div>'
@@ -977,9 +915,8 @@ function showCarDetail(id){
         +'<button class="d-share" onclick="shareCar()">🔗 Copiar link deste carro</button>'
         +(desc?'<div class="d-desc"><h3>Sobre o veículo</h3><p>'+esc(desc)+'</p></div>':'')
       +'</div>'
-    +'</div>'+simHtml;
+    +'</div>';
   renderGallery();
-  if(pv>0){_finValor=pv;_finNome=c.nome||'veículo';_troca=true;calcFin();}
   injectVehicleSchema(c,pv);
   showOnly('carro');
 }
@@ -1081,42 +1018,6 @@ function lbNav(d){
 })();
 
 /* ─── FINANCIAR ─── */
-let _troca=true,_finValor=0,_finNome='';
-function setTroca(v){
-  _troca=v;
-  document.getElementById('tr-sim').classList.toggle('on',v);
-  document.getElementById('tr-nao').classList.toggle('on',!v);
-  calcFin();
-}
-function calcFin(){
-  const eEnt=document.getElementById('r-entrada');
-  if(!eEnt)return;
-  const valor=_finValor||0;
-  const pct=+eEnt.value;
-  const prazo=+document.getElementById('r-prazo').value;
-  const entrada=Math.round(valor*pct/100);
-  const fin=Math.max(0,valor-entrada);
-  const i=TAXA_AM;
-  let parcela=0;
-  if(fin>0&&prazo>0)parcela=fin*i*Math.pow(1+i,prazo)/(Math.pow(1+i,prazo)-1);
-  const total=parcela*prazo;
-  document.getElementById('fv-entrada').textContent=brl(entrada)+' ('+pct+'%)';
-  document.getElementById('fv-prazo').textContent=prazo+' meses';
-  document.getElementById('fv-parcela').innerHTML=brl(Math.round(parcela))+'<small>/mês</small>';
-  document.getElementById('fv-emparcelas').textContent='em '+prazo+' parcelas';
-  document.getElementById('fv-fin').textContent=brl(fin);
-  document.getElementById('fv-taxa').textContent=(TAXA_AM*100).toFixed(2).replace('.',',')+'% a.m.';
-  document.getElementById('fv-total').textContent=brl(Math.round(total));
-  const msg='Olá! Fiz uma simulação no site da Rondelson Car'+(_finNome?' para o '+_finNome:'')+':\n'
-    +'• Valor do veículo: '+brl(valor)+'\n'
-    +'• Entrada: '+brl(entrada)+'\n'
-    +'• '+prazo+'x de '+brl(Math.round(parcela))+'\n'
-    +'• Troca: '+(_troca?'quero avaliar meu carro':'sem troca')+'\n'
-    +'Pode me confirmar os valores certos?';
-  const w=document.getElementById('fin-wpp');
-  if(w)w.href=wpp(msg);
-}
-
 /* ─── CONTATO: FAQ ─── */
 function toggleFaq(btn){
   const item=btn.parentElement;
