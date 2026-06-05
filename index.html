@@ -186,6 +186,9 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
 .card-img{position:relative;aspect-ratio:4/3;background:var(--bg3);overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .card:hover .card-img img{transform:scale(1.05)}
+.ctag{position:absolute;top:9px;left:9px;font-size:10.5px;font-weight:700;letter-spacing:.3px;padding:5px 10px;border-radius:13px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.ctag-cli{background:#f0883e;color:#1a1205}
+.ctag-prep{background:#58a6ff;color:#04101f}
 .noimg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:repeating-linear-gradient(45deg,#171717,#171717 13px,#1c1c1c 13px,#1c1c1c 26px)}
 .noimg .nicon{font-size:32px;opacity:.5}
 .noimg .ntxt{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2.5px;color:#6f6f6f}
@@ -692,6 +695,17 @@ async function fetchCars(){
 }
 
 /* ─── Card de carro (Home e Estoque) ─── */
+// Tag de situação no card: "Com o cliente" (consignado que está com o dono)
+// ou "Em preparação" (ainda não finalizou o preparo / não foi pro showroom).
+function carTag(c){
+  if(c.consignado===true && c.consignadoComCliente===true)
+    return '<span class="ctag ctag-cli">📍 Com o cliente</span>';
+  var showroomPronto=(c.swChecked&&c.swChecked.length>0)||c.prForcado===true||(c.swFotosSite&&c.swFotosSite.length>0);
+  var emPreparo=((c.prChecked&&c.prChecked.length>0)||c.prcAceito===true||c.consignado===true);
+  if(emPreparo && !showroomPronto)
+    return '<span class="ctag ctag-prep">🔧 Em preparação</span>';
+  return '';
+}
 function carCard(c){
   const fotos=photosOf(c);
   const pv=priceNum(c.swPrecoVenda);
@@ -705,6 +719,7 @@ function carCard(c){
   return '<article class="card" onclick="goCar(\''+c.id+'\')">'
     +'<div class="card-img">'
       +(fotos[0]?'<img loading="lazy" src="'+fotos[0]+'" alt="'+esc(c.nome)+'">':NO_PHOTO)
+      +carTag(c)
     +'</div>'
     +'<div class="card-body">'
       +'<div class="card-name">'+esc(c.nome||'Veículo')+'</div>'
