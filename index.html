@@ -189,7 +189,6 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
 .noimg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:repeating-linear-gradient(45deg,#171717,#171717 13px,#1c1c1c 13px,#1c1c1c 26px)}
 .noimg .nicon{font-size:32px;opacity:.5}
 .noimg .ntxt{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2.5px;color:#6f6f6f}
-.pcount{position:absolute;bottom:9px;right:9px;font-size:10.5px;font-weight:700;background:rgba(0,0,0,.72);color:#fff;padding:4px 8px;border-radius:13px}
 .card-body{padding:14px 15px 16px}
 .card-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.5px;color:var(--white);line-height:1.05}
 .card-spec{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.5px;color:var(--mut);margin-top:7px;text-transform:uppercase}
@@ -427,10 +426,6 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <div class="trust-txt"><b>★★★★★</b><span>Avaliação Google</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="trust-txt"><b id="trust-familias" data-target="500" data-suffix="+">+500</b><span>Famílias atendidas</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
@@ -710,7 +705,6 @@ function carCard(c){
   return '<article class="card" onclick="goCar(\''+c.id+'\')">'
     +'<div class="card-img">'
       +(fotos[0]?'<img loading="lazy" src="'+fotos[0]+'" alt="'+esc(c.nome)+'">':NO_PHOTO)
-      +(fotos.length>1?'<span class="pcount">📷 '+fotos.length+'</span>':'')
     +'</div>'
     +'<div class="card-body">'
       +'<div class="card-name">'+esc(c.nome||'Veículo')+'</div>'
@@ -750,19 +744,9 @@ function renderHomeDestaques(){
 }
 
 /* ─── HOME: numeros ─── */
-const FAMILIAS_BASE = 54; // vendas de anos anteriores (ex: 54 em 2025). Some com as vendas do ano atual.
 function renderNumeros(){
   const el=document.getElementById('trust-vendas');
   if(el)el.textContent=(NUMEROS.vendidos!=null?NUMEROS.vendidos:130)+'/'+(NUMEROS.meta!=null?NUMEROS.meta:300);
-  const ef=document.getElementById('trust-familias');
-  if(ef){
-    // Famílias atendidas = vendas do ano atual + base de anos anteriores (calculado automaticamente)
-    const vend=(NUMEROS.vendidos!=null?Number(NUMEROS.vendidos):0)||0;
-    const v=FAMILIAS_BASE+vend;
-    // se ainda não animou, atualiza o alvo; senão, escreve direto
-    if(!ef.dataset.animated){ef.setAttribute('data-target',v);ef.textContent='+'+v;}
-    else ef.textContent='+'+v;
-  }
 }
 
 /* ─── HOME: depoimentos ─── */
