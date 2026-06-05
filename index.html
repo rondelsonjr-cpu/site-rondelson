@@ -699,6 +699,12 @@ async function fetchCars(){
 // Situação do carro para a tag: "Com o cliente" (consignado que está com o dono)
 // ou "Em preparação" (ainda não foi pro showroom). Retorna null se já está pronto.
 function _carTagInfo(c){
+  // 1) Tag gravada pelo sistema (caminho garantido — chega via vitrine)
+  var tg=c.swTagSite||'';
+  if(/cliente/i.test(tg))return {label:'📍 Com o cliente',cls:'cli',cor:'#f0883e'};
+  if(/prepar/i.test(tg))return {label:'🔧 Em preparação',cls:'prep',cor:'#58a6ff'};
+  if(tg)return null; // sistema mandou tag vazia = carro pronto, sem tag
+  // 2) Fallback: calcula pelos campos, caso venham no dado do site
   if(c.consignado===true && c.consignadoComCliente===true)
     return {label:'📍 Com o cliente',cls:'cli',cor:'#f0883e'};
   var pronto=(c.swChecked&&c.swChecked.length>0)||c.prForcado===true||(c.swFotosSite&&c.swFotosSite.length>0);
