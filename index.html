@@ -728,7 +728,6 @@ function carCard(c){
   return '<article class="card" onclick="goCar(\''+c.id+'\')">'
     +'<div class="card-img">'
       +(fotos[0]?'<img loading="lazy" src="'+fotos[0]+'" alt="'+esc(c.nome)+'">':NO_PHOTO)
-      +carTag(c)
     +'</div>'
     +'<div class="card-body">'
       +'<div class="card-name">'+esc(c.nome||'Veículo')+'</div>'
