@@ -265,6 +265,13 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
 .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
 .faq-a p{padding:0 18px 17px;font-size:14px;line-height:1.6;color:var(--mut)}
 .faq-item.open .faq-a{max-height:240px}
+.faq-item.faq-consig.open .faq-a{max-height:1600px}
+.consig-rules{padding:2px 18px 18px;display:flex;flex-direction:column;gap:9px}
+.consig-rule{display:flex;gap:12px;align-items:flex-start;background:var(--bg3);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.consig-rule .cn{flex-shrink:0;width:38px;height:38px;border-radius:9px;background:var(--gold-grad);color:var(--on-gold);font-family:'Bebas Neue',sans-serif;font-size:19px;display:flex;align-items:center;justify-content:center;letter-spacing:1px}
+.consig-rule b{display:block;font-size:14px;color:var(--txt);margin-bottom:2px}
+.consig-rule .rd{display:block;font-size:13px;color:var(--mut);line-height:1.5}
+.consig-foot{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--gold-lt);background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.3);border-radius:10px;padding:11px 13px;margin-top:3px}
 .faq-item.open .pm{color:var(--gold)}
 .contact-card{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg2)}
 .contact-card h4{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase;margin-bottom:16px}
@@ -550,7 +557,15 @@ h1.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,82px);line-h
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vocês aceitam meu carro na troca?<span class="pm">+</span></button><div class="faq-a"><p>Sim — qualquer marca. A avaliação é gratuita e leva cerca de 20 minutos. Você pode adiantar mandando a placa, a quilometragem e uma foto no nosso WhatsApp.</p></div></div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Como funciona a garantia?<span class="pm">+</span></button><div class="faq-a"><p>Todo veículo passa por avaliação antes de ir para a venda. Fale com a gente no WhatsApp para confirmar as condições de garantia do carro que você tem interesse.</p></div></div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Posso financiar sem entrada?<span class="pm">+</span></button><div class="faq-a"><p>O financiamento depende de análise de crédito. Em muitos casos é possível financiar com entrada baixa ou sem entrada. Chama a gente no WhatsApp que a gente te orienta e simula as melhores condições pra você.</p></div></div>
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vocês fazem consignação?<span class="pm">+</span></button><div class="faq-a"><p>Sim. Se você prefere deixar seu carro com a gente para vender, trabalhamos com consignação. Chame no WhatsApp para entender como funciona.</p></div></div>
+        <div class="faq-item faq-consig"><button class="faq-q" onclick="toggleFaq(this)">Vocês fazem consignação?<span class="pm">+</span></button><div class="faq-a"><p>Sim. Se você prefere deixar seu carro com a gente para vender, trabalhamos com consignação. Veja as regras:</p><div class="consig-rules">
+          <div class="consig-rule"><span class="cn">01</span><div><b>30 dias de exclusividade</b><span class="rd">O veículo fica sob exclusividade da Rondelson Car durante o período de consignação.</span></div></div>
+          <div class="consig-rule"><span class="cn">02</span><div><b>Carro na loja</b><span class="rd">O veículo deve permanecer na loja para exposição e negociação.</span></div></div>
+          <div class="consig-rule"><span class="cn">03</span><div><b>Histórico de revisão comprovado</b><span class="rd">É necessário apresentar revisões ou manutenções comprovadas.</span></div></div>
+          <div class="consig-rule"><span class="cn">04</span><div><b>Padrão Rondelson Car</b><span class="rd">Veículos com no máximo 50 mil km rodados.</span></div></div>
+          <div class="consig-rule"><span class="cn">05</span><div><b>Comissão por garantia</b><span class="rd">6% para carros na garantia de fábrica e 7% para carros fora da garantia de fábrica.</span></div></div>
+          <div class="consig-rule"><span class="cn">06</span><div><b>Custos de preparação por conta do cliente</b><span class="rd">A preparação, estética e ajustes ficam por conta do proprietário.</span></div></div>
+          <div class="consig-foot">💬 Dúvidas? Fale com a equipe antes de enviar o veículo.</div>
+        </div></div></div>
         <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Que documentos preciso levar?<span class="pm">+</span></button><div class="faq-a"><p>Para comprar: documento com foto e comprovante de residência. Para financiar, pode haver documentos adicionais conforme o banco. A gente te passa a lista certinha pelo WhatsApp.</p></div></div>
         <div class="faq-ask">
           <div><b>Não achou sua dúvida?</b><span>A gente responde no WhatsApp</span></div>
@@ -699,12 +714,14 @@ async function fetchCars(){
 // Situação do carro para a tag: "Com o cliente" (consignado que está com o dono)
 // ou "Em preparação" (ainda não foi pro showroom). Retorna null se já está pronto.
 function _carTagInfo(c){
-  // 1) Tag gravada pelo sistema (caminho garantido — chega via vitrine)
-  var tg=c.swTagSite||'';
-  if(/cliente/i.test(tg))return {label:'📍 Com o cliente',cls:'cli',cor:'#f0883e'};
-  if(/prepar/i.test(tg))return {label:'🔧 Em preparação',cls:'prep',cor:'#58a6ff'};
-  if(tg)return null; // sistema mandou tag vazia = carro pronto, sem tag
-  // 2) Fallback: calcula pelos campos, caso venham no dado do site
+  // 1) Tag gravada pelo sistema (campo swTagSite). Se existir, confia nela.
+  var tg=c.swTagSite;
+  if(tg!==undefined && tg!==null){
+    if(/cliente/i.test(tg))return {label:'📍 Com o cliente',cls:'cli',cor:'#f0883e'};
+    if(/prepar/i.test(tg))return {label:'🔧 Em preparação',cls:'prep',cor:'#58a6ff'};
+    return null; // tag vazia = carro pronto, sem tag
+  }
+  // 2) Fallback: carro ainda não foi salvo pelo sistema atualizado
   if(c.consignado===true && c.consignadoComCliente===true)
     return {label:'📍 Com o cliente',cls:'cli',cor:'#f0883e'};
   var pronto=(c.swChecked&&c.swChecked.length>0)||c.prForcado===true||(c.swFotosSite&&c.swFotosSite.length>0);
