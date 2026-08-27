@@ -15366,7 +15366,25 @@ function cdpOpen(i){
   document.getElementById('cdp-nome').textContent = car.nome || '';
   const nomeInp=document.getElementById('cdp-nome-input');if(nomeInp)nomeInp.value=car.nome||'';
   const placaInp=document.getElementById('cdp-placa-input');if(placaInp)placaInp.value=car.placa||'';
-  const custoInp=document.getElementById('cdp-custo-display');if(custoInp)custoInp.value=car.valor||'';
+  // VALOR DE COMPRA: puxa SEMPRE o valor atual da Negociação do carro (prcCompraReal),
+  // ou o da consignação, ou o da Avaliação. Só usa o valor guardado no estoque se o
+  // carro não tiver nenhum desses. Assim nunca mostra um valor velho/desatualizado.
+  const custoInp=document.getElementById('cdp-custo-display');
+  if(custoInp){
+    let _compra=0;
+    if(car.opCarId){
+      const _d=load(); const _op=_d&&_d[car.opCarId];
+      if(_op){
+        _compra=_pgtoNum(_op.prcCompraReal)||_pgtoNum(_op.prcConsigEntrada)||_pgtoNum(_op.pcValor)||0;
+      }
+    }
+    if(!_compra)_compra=_pgtoNum(car.valor)||0;   // fallback: valor guardado no estoque
+    custoInp.value=_compra||'';
+    // mantém o estoque em dia com o valor real da Negociação
+    if(_compra && _pgtoNum(car.valor)!==_compra){
+      const its=finGetData('estoque'); if(its[i]){its[i].valor=_compra; finSetData('estoque',its);}
+    }
+  }
   const dataInp=document.getElementById('cdp-data-entrada');if(dataInp)dataInp.value=car.dataEntrada||new Date().toISOString().slice(0,10);
   // Valor de Venda: puxa direto do campo "Valor de venda" da aba Entrega do carro operacional
   let _vendaEntrega=0;
