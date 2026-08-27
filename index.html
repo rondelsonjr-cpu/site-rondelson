@@ -6949,6 +6949,27 @@ function syncTodosOperacionalParaEstoque(){
   }catch(e){console.warn('Sync falhou:', e);}
 }
 
+// Garante que todo carro VENDIDO ou de REPASSE tenha um registro na lista de Vendas.
+// Roda ao abrir a aba Vendas/Repasse — assim carro vendido nunca fica de fora da lista.
+function syncVendidosParaVendas(){
+  try{
+    const d=(typeof load==='function')?load():null;
+    if(!d)return;
+    if(typeof vendasLoad==='function')vendasLoad();
+    const existentes=new Set((Array.isArray(_vendasData)?_vendasData:[]).map(function(v){return v&&v.opCarId;}).filter(Boolean));
+    const ESP={__banners__:1,__crm__:1,__depoimentos__:1,__numeros__:1};
+    Object.keys(d).forEach(function(id){
+      if(ESP[id])return;
+      const c=d[id];
+      if(!c||typeof c!=='object')return;
+      const saiu=(c.vendido===true)||(c.repasse===true);
+      if(!saiu)return;
+      if(existentes.has(id))return;                 // já tem registro de venda
+      try{ if(typeof _venderAutomatico==='function')_venderAutomatico(id); }catch(e){}
+    });
+  }catch(e){console.warn('syncVendidosParaVendas falhou:', e);}
+}
+
 function pcMarcarTudo(){
   const d=load();
   const allKeys=[];
@@ -14099,6 +14120,7 @@ function showFinTab(name,btn){
     recebRender();
   }
   if(name==='vendas'||name==='repasse'){
+    if(typeof syncVendidosParaVendas==='function')syncVendidosParaVendas();
     if(typeof _sanitizarEstoqueVsVendas==='function')_sanitizarEstoqueVsVendas();
     if(typeof vendasRenderAll==='function')vendasRenderAll();
   }
